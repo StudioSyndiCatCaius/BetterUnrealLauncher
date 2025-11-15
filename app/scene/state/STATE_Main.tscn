@@ -1,0 +1,212 @@
+[gd_scene load_steps=8 format=3 uid="uid://0cmv1q4umxym"]
+
+[ext_resource type="Script" uid="uid://ik2rnxjh04v0" path="res://app/scene/state/state_main.gd" id="1_cny1t"]
+[ext_resource type="Texture2D" uid="uid://5oabyl1p7xjl" path="res://icon.svg" id="1_e7f8g"]
+[ext_resource type="Theme" uid="uid://dds1u0x04ydtm" path="res://app/asset/themes/theme_button.tres" id="3_3fclj"]
+[ext_resource type="Texture2D" uid="uid://blhgl03jb27sq" path="res://app/asset/2D/icons/ico_refresh.png" id="4_fxxkx"]
+[ext_resource type="Texture2D" uid="uid://b7ou7greodasu" path="res://app/asset/2D/icons/ico_search.png" id="4_l4l8u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqbsd"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cny1t"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Node" type="PanelContainer" node_paths=PackedStringArray("list_engine_ver", "list_projects", "lbl_log_line", "txtedit_paths_engines", "txtedit_paths_projects")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_oqbsd")
+script = ExtResource("1_cny1t")
+list_engine_ver = NodePath("TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_EngineVer")
+list_projects = NodePath("TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_Projects")
+lbl_log_line = NodePath("TabContainer/MAIN/m/PanelContainer/lbl_logLine")
+txtedit_paths_engines = NodePath("TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/txtedit_PathsEngines")
+txtedit_paths_projects = NodePath("TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/txtEdit_PathsProjects")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+current_tab = 0
+
+[node name="MAIN" type="PanelContainer" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="m" type="VBoxContainer" parent="TabContainer/MAIN"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/MAIN/m"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MAIN/m/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Engine Versions"
+
+[node name="btn_ReloadEngines" type="Button" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_3fclj")
+text = "Reload"
+icon = ExtResource("4_fxxkx")
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="list_EngineVer" type="ItemList" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+auto_height = true
+item_count = 3
+max_columns = 5
+fixed_icon_size = Vector2i(100, 100)
+item_0/text = "5.5"
+item_0/icon = ExtResource("1_e7f8g")
+item_1/text = "5.6"
+item_1/icon = ExtResource("1_e7f8g")
+item_2/text = "5.7"
+item_2/icon = ExtResource("1_e7f8g")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Projects"
+
+[node name="btn_ReloadProjects" type="Button" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_3fclj")
+text = "Reload"
+icon = ExtResource("4_fxxkx")
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="list_Projects" type="ItemList" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+auto_width = true
+auto_height = true
+item_count = 3
+max_columns = 5
+same_column_width = true
+icon_mode = 0
+fixed_icon_size = Vector2i(100, 100)
+item_0/text = "5.5"
+item_0/icon = ExtResource("1_e7f8g")
+item_1/text = "5.6"
+item_1/icon = ExtResource("1_e7f8g")
+item_2/text = "5.7"
+item_2/icon = ExtResource("1_e7f8g")
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/MAIN/m"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cny1t")
+
+[node name="lbl_logLine" type="Label" parent="TabContainer/MAIN/m/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+vertical_alignment = 1
+
+[node name="CONFIG" type="PanelContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="ScrollContainer" parent="TabContainer/CONFIG"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/CONFIG/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_OpenSave" type="Button" parent="TabContainer/CONFIG/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_3fclj")
+text = "Open Config Save Folder"
+icon = ExtResource("4_l4l8u")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/CONFIG/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Engine Paths"
+
+[node name="txtedit_PathsEngines" type="TextEdit" parent="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Project Paths"
+
+[node name="txtEdit_PathsProjects" type="TextEdit" parent="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0, 0, 0, 1)
+
+[node name="_cmp" type="Node" parent="."]
+
+[node name="timer_logDisplay" type="Timer" parent="_cmp"]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[node name="timer_LaunchCooldown" type="Timer" parent="_cmp"]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[connection signal="pressed" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer/btn_ReloadEngines" to="." method="_on_btn_reload_engines_pressed"]
+[connection signal="item_activated" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_EngineVer" to="." method="_on_list_engine_ver_item_activated"]
+[connection signal="pressed" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer2/btn_ReloadProjects" to="." method="_on_btn_reload_projects_pressed"]
+[connection signal="item_activated" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_Projects" to="." method="_on_list_projects_item_activated"]
+[connection signal="item_selected" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_Projects" to="." method="_on_list_projects_item_selected"]
+[connection signal="pressed" from="TabContainer/CONFIG/VBoxContainer/VBoxContainer/btn_OpenSave" to="." method="_on_btn_open_save_pressed"]
+[connection signal="text_changed" from="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/txtedit_PathsEngines" to="." method="_on_txtedit_paths_engines_text_changed"]
+[connection signal="text_changed" from="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/txtEdit_PathsProjects" to="." method="_on_txt_edit_paths_projects_text__changed"]
+[connection signal="timeout" from="_cmp/timer_logDisplay" to="." method="_on_timer_log_display_timeout"]
+[connection signal="timeout" from="_cmp/timer_LaunchCooldown" to="." method="_on_timer_launch_cooldown_timeout"]
