@@ -20,6 +20,7 @@ config/icon="uid://cdxqftbdy03w1"
 
 G="*res://app/script/global/G.gd"
 G_Load="*res://app/script/global/G_Load.gd"
+G_File="*res://app/script/global/G_File.gd"
 
 [file_customization]
 

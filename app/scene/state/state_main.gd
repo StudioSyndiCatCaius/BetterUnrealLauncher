@@ -48,7 +48,6 @@ func _on_list_engine_ver_item_activated(index):
 		can_launch=false
 		var _ver=G.UE_LoadedVersion[index]
 		_ver.LAUNCH()
-		G.LOG("Starting Engine Version: "+_ver.engine_version,0)
 		list_engine_ver.modulate.a=0.5
 		%timer_LaunchCooldown.start()
 
@@ -76,7 +75,6 @@ func _on_txtedit_paths_engines_text_changed():
 
 
 func _on_txt_edit_paths_projects_text__changed():
-	print('ruam')
 	G.config.project_installpaths=txtedit_paths_projects.text.split("\n")
 
 

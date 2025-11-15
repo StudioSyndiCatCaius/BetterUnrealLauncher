@@ -88,6 +88,7 @@ layout_mode = 2
 auto_height = true
 item_count = 3
 max_columns = 5
+icon_mode = 0
 fixed_icon_size = Vector2i(100, 100)
 item_0/text = "5.5"
 item_0/icon = ExtResource("1_e7f8g")
