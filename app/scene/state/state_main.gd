@@ -4,6 +4,7 @@ extends PanelContainer
 @export var list_engine_ver: ItemList
 @export var list_projects: ItemList
 @export var lbl_log_line: Label
+@export var N_project: ui_Project
 
 # - CONFIG
 @export var txtedit_paths_engines: TextEdit
@@ -62,8 +63,8 @@ func _on_btn_open_save_pressed():
 
 func _on_list_projects_item_activated(index):
 	var _proj=G.UE_LoadedProjects[index]
-	if _proj:
-		_proj.LAUNCH()
+	N_project.LOAD(_proj)
+	
 
 
 ## ========================================================================

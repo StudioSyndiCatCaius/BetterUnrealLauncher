@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://0cmv1q4umxym"]
+[gd_scene load_steps=9 format=3 uid="uid://0cmv1q4umxym"]
 
 [ext_resource type="Script" uid="uid://ik2rnxjh04v0" path="res://app/scene/state/state_main.gd" id="1_cny1t"]
 [ext_resource type="Texture2D" uid="uid://5oabyl1p7xjl" path="res://icon.svg" id="1_e7f8g"]
 [ext_resource type="Theme" uid="uid://dds1u0x04ydtm" path="res://app/asset/themes/theme_button.tres" id="3_3fclj"]
 [ext_resource type="Texture2D" uid="uid://blhgl03jb27sq" path="res://app/asset/2D/icons/ico_refresh.png" id="4_fxxkx"]
 [ext_resource type="Texture2D" uid="uid://b7ou7greodasu" path="res://app/asset/2D/icons/ico_search.png" id="4_l4l8u"]
+[ext_resource type="PackedScene" uid="uid://bhjc21uga6dil" path="res://app/scene/ui/ui_Project.tscn" id="5_posn4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqbsd"]
 content_margin_left = 20.0
@@ -30,7 +31,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="Node" type="PanelContainer" node_paths=PackedStringArray("list_engine_ver", "list_projects", "lbl_log_line", "txtedit_paths_engines", "txtedit_paths_projects")]
+[node name="Node" type="PanelContainer" node_paths=PackedStringArray("list_engine_ver", "list_projects", "lbl_log_line", "N_project", "txtedit_paths_engines", "txtedit_paths_projects")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,8 +42,9 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_oqbsd")
 script = ExtResource("1_cny1t")
 list_engine_ver = NodePath("TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_EngineVer")
-list_projects = NodePath("TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_Projects")
+list_projects = NodePath("TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/list_Projects")
 lbl_log_line = NodePath("TabContainer/MAIN/m/PanelContainer/lbl_logLine")
+N_project = NodePath("TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/UiProject")
 txtedit_paths_engines = NodePath("TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/txtedit_PathsEngines")
 txtedit_paths_projects = NodePath("TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/txtEdit_PathsProjects")
 
@@ -114,8 +116,14 @@ icon = ExtResource("4_fxxkx")
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="list_Projects" type="ItemList" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HSplitContainer" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+split_offset = 500
+
+[node name="list_Projects" type="ItemList" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 auto_width = true
 auto_height = true
@@ -130,6 +138,10 @@ item_1/text = "5.6"
 item_1/icon = ExtResource("1_e7f8g")
 item_2/text = "5.7"
 item_2/icon = ExtResource("1_e7f8g")
+
+[node name="UiProject" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("5_posn4")]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="TabContainer/MAIN/m"]
 custom_minimum_size = Vector2(0, 30)
@@ -204,8 +216,8 @@ wait_time = 3.0
 [connection signal="pressed" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer/btn_ReloadEngines" to="." method="_on_btn_reload_engines_pressed"]
 [connection signal="item_activated" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_EngineVer" to="." method="_on_list_engine_ver_item_activated"]
 [connection signal="pressed" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer2/btn_ReloadProjects" to="." method="_on_btn_reload_projects_pressed"]
-[connection signal="item_activated" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_Projects" to="." method="_on_list_projects_item_activated"]
-[connection signal="item_selected" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_Projects" to="." method="_on_list_projects_item_selected"]
+[connection signal="item_activated" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/list_Projects" to="." method="_on_list_projects_item_activated"]
+[connection signal="item_selected" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/list_Projects" to="." method="_on_list_projects_item_selected"]
 [connection signal="pressed" from="TabContainer/CONFIG/VBoxContainer/VBoxContainer/btn_OpenSave" to="." method="_on_btn_open_save_pressed"]
 [connection signal="text_changed" from="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/txtedit_PathsEngines" to="." method="_on_txtedit_paths_engines_text_changed"]
 [connection signal="text_changed" from="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/txtEdit_PathsProjects" to="." method="_on_txt_edit_paths_projects_text__changed"]
