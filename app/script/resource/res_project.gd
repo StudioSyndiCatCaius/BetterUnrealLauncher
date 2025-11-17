@@ -1,6 +1,7 @@
 extends Resource
 class_name UE_Project
 
+
 var base_path=""
 var file_name=""
 var engine_version='0.0'
@@ -21,6 +22,14 @@ func LAUNCH():
 	else:
 		G.LOG("Failed to launch. Engine version "+engine_key+" NOT installed",2)
 
+func PlayBuild():
+	var _buildPath=Get_PathTo_LastBuild()
+	if FileAccess.file_exists(_buildPath):
+		OS.create_process(_buildPath,[])
+		G.LOG("Launching Game: "+_buildPath,0)
+	else:
+		G.LOG("Failed to launch. "+_buildPath+" NOT found",2)
+
 func Load(uproject_path: String):
 	var path_split=uproject_path.rsplit("/",true,1)
 	base_path=path_split[0]
@@ -33,6 +42,9 @@ func Load(uproject_path: String):
 	thumb_file=base_path+file_name+".png"
 	if FileAccess.file_exists(thumb_file):
 		thumbnail=G_Load.Texture(thumb_file)
+
+func Get_PathTo_LastBuild() -> String:
+	return base_path+"/Saved/StagedBuilds/Windows/"+file_name+".exe"
 
 func Get_PathTo_Uproject() -> String:
 	return base_path+file_name+".uproject"

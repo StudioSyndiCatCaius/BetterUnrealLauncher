@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhjc21uga6dil"]
+[gd_scene load_steps=10 format=3 uid="uid://bhjc21uga6dil"]
 
 [ext_resource type="Texture2D" uid="uid://5oabyl1p7xjl" path="res://icon.svg" id="1_6nrus"]
 [ext_resource type="Script" uid="uid://bjndb006c0doh" path="res://app/scene/ui/ui_project.gd" id="1_pqht5"]
 [ext_resource type="Theme" uid="uid://dds1u0x04ydtm" path="res://app/asset/themes/theme_button.tres" id="2_hmgrk"]
 [ext_resource type="LabelSettings" uid="uid://2qa3ulber8aj" path="res://app/res/labelSettings/paramName.tres" id="3_wpofa"]
+[ext_resource type="Texture2D" uid="uid://c23wy0t02opd0" path="res://app/asset/2D/icons/ico_folder.png" id="4_3x3df"]
 [ext_resource type="LabelSettings" uid="uid://iiuf4e80bp64" path="res://app/res/labelSettings/lblSet_paramValue.tres" id="4_dn3va"]
+[ext_resource type="Texture2D" uid="uid://c708e3gwkn5oe" path="res://app/asset/2D/icons/ico_engine.png" id="4_h1tba"]
+[ext_resource type="Texture2D" uid="uid://808dps0r2440" path="res://app/asset/2D/icons/ico_controller.png" id="6_h1tba"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6nrus"]
 content_margin_left = 5.0
@@ -18,7 +21,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="UiProject" type="PanelContainer" node_paths=PackedStringArray("IMG_icon", "N_lbl_nam", "N_lbl_path", "N_lbl_ver", "N_lbl_cat", "N_lbl_desc")]
+[node name="UiProject" type="PanelContainer" node_paths=PackedStringArray("IMG_icon", "N_lbl_nam", "N_lbl_path", "N_lbl_ver", "N_lbl_cat", "N_lbl_desc", "btn_OpenPath", "btn_launch", "btn_OpenPlugin", "btn_PlayGame")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,6 +34,10 @@ N_lbl_path = NodePath("PanelContainer/VBoxContainer/VBoxContainer2/HBoxContainer
 N_lbl_ver = NodePath("PanelContainer/VBoxContainer/VBoxContainer2/HBoxContainer2/txt_ver")
 N_lbl_cat = NodePath("PanelContainer/VBoxContainer/VBoxContainer2/HBoxContainer3/txt_cat")
 N_lbl_desc = NodePath("PanelContainer/VBoxContainer/VBoxContainer2/HBoxContainer4/txt_desc")
+btn_OpenPath = NodePath("PanelContainer/VBoxContainer/GridContainer/btn_OpenPath")
+btn_launch = NodePath("PanelContainer/VBoxContainer/GridContainer/btn_launch")
+btn_OpenPlugin = NodePath("PanelContainer/VBoxContainer/GridContainer/btn_OpenPath2")
+btn_PlayGame = NodePath("PanelContainer/VBoxContainer/GridContainer/btn_PlayGame")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -61,15 +68,37 @@ text = "--"
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="btn_launch" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("2_hmgrk")
-text = "Launch"
+columns = 2
 
-[node name="btn_OpenPath" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="btn_OpenPath" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("2_hmgrk")
 text = "Open Folder"
+icon = ExtResource("4_3x3df")
+
+[node name="btn_launch" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hmgrk")
+text = "Launch Editor"
+icon = ExtResource("4_h1tba")
+
+[node name="btn_OpenPath2" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hmgrk")
+text = "Open Plugins"
+icon = ExtResource("4_3x3df")
+
+[node name="btn_PlayGame" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hmgrk")
+text = "Play Latest Build"
+icon = ExtResource("6_h1tba")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -138,5 +167,7 @@ text = "---"
 label_settings = ExtResource("4_dn3va")
 autowrap_mode = 1
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/btn_launch" to="." method="_on_btn_launch_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/btn_OpenPath" to="." method="_on_btn_open_path_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/btn_OpenPath" to="." method="_on_btn_open_path_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/btn_launch" to="." method="_on_btn_launch_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/btn_OpenPath2" to="." method="_on_btn_open_path_2_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/btn_PlayGame" to="." method="_on_btn_play_game_pressed"]
