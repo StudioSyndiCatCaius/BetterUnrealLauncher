@@ -41,8 +41,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_oqbsd")
 script = ExtResource("1_cny1t")
-list_engine_ver = NodePath("TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_EngineVer")
-list_projects = NodePath("TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/list_Projects")
+list_engine_ver = NodePath("TabContainer/MAIN/m/ScrollContainer/VBoxContainer/ScrollContainer/list_EngineVer")
+list_projects = NodePath("TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/ScrollContainer/list_Projects")
 lbl_log_line = NodePath("TabContainer/MAIN/m/PanelContainer/lbl_logLine")
 N_project = NodePath("TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/UiProject")
 txtedit_paths_engines = NodePath("TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/txtedit_PathsEngines")
@@ -59,7 +59,7 @@ metadata/_tab_index = 0
 [node name="m" type="VBoxContainer" parent="TabContainer/MAIN"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/MAIN/m"]
+[node name="ScrollContainer" type="PanelContainer" parent="TabContainer/MAIN/m"]
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -85,8 +85,16 @@ icon = ExtResource("4_fxxkx")
 [node name="HSeparator" type="HSeparator" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="list_EngineVer" type="ItemList" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="list_EngineVer" type="ItemList" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 auto_height = true
 item_count = 3
 max_columns = 5
@@ -121,14 +129,18 @@ layout_mode = 2
 size_flags_vertical = 3
 split_offset = 500
 
-[node name="list_Projects" type="ItemList" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="list_Projects" type="ItemList" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 auto_width = true
 auto_height = true
-item_count = 3
-max_columns = 5
+item_count = 6
+max_columns = 6
 same_column_width = true
 icon_mode = 0
 fixed_icon_size = Vector2i(100, 100)
@@ -138,6 +150,9 @@ item_1/text = "5.6"
 item_1/icon = ExtResource("1_e7f8g")
 item_2/text = "5.7"
 item_2/icon = ExtResource("1_e7f8g")
+item_3/text = "6534645"
+item_4/text = "57"
+item_5/text = "770707"
 
 [node name="UiProject" parent="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("5_posn4")]
 custom_minimum_size = Vector2(400, 0)
@@ -214,10 +229,10 @@ unique_name_in_owner = true
 wait_time = 3.0
 
 [connection signal="pressed" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer/btn_ReloadEngines" to="." method="_on_btn_reload_engines_pressed"]
-[connection signal="item_activated" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/list_EngineVer" to="." method="_on_list_engine_ver_item_activated"]
+[connection signal="item_activated" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/ScrollContainer/list_EngineVer" to="." method="_on_list_engine_ver_item_activated"]
 [connection signal="pressed" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer2/btn_ReloadProjects" to="." method="_on_btn_reload_projects_pressed"]
-[connection signal="item_activated" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/list_Projects" to="." method="_on_list_projects_item_activated"]
-[connection signal="item_selected" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/list_Projects" to="." method="_on_list_projects_item_selected"]
+[connection signal="item_activated" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/ScrollContainer/list_Projects" to="." method="_on_list_projects_item_activated"]
+[connection signal="item_selected" from="TabContainer/MAIN/m/ScrollContainer/VBoxContainer/HBoxContainer3/ScrollContainer/list_Projects" to="." method="_on_list_projects_item_selected"]
 [connection signal="pressed" from="TabContainer/CONFIG/VBoxContainer/VBoxContainer/btn_OpenSave" to="." method="_on_btn_open_save_pressed"]
 [connection signal="text_changed" from="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/txtedit_PathsEngines" to="." method="_on_txtedit_paths_engines_text_changed"]
 [connection signal="text_changed" from="TabContainer/CONFIG/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/txtEdit_PathsProjects" to="." method="_on_txt_edit_paths_projects_text__changed"]
